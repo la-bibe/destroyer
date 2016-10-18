@@ -1,0 +1,14 @@
+#!/bin/bash
+clear
+echo "+-------------------------------------------------+"
+echo "|                                                 |"
+echo "|               +-----------------+               |"
+echo "|               |Destroyer V.0.1.1|               |"
+echo "|               +-----------------+               |"
+echo "|                                                 |"
+echo "|                                                 |"
+echo "|         Script created by Fantin Bibas.         |"
+echo "|                                                 |"
+echo "|   With great power comes great responsibility   |"
+echo "|                                                 |"
+echo "+-------------------------------------------------+"
