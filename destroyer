@@ -1,9 +1,10 @@
 #!/bin/bash
 clear
+version='0.0.1'
 echo "+-------------------------------------------------+"
 echo "|                                                 |"
 echo "|               +-----------------+               |"
-echo "|               |Destroyer V.0.1.1|               |"
+echo "|               |Destroyer V.$version|               |"
 echo "|               +-----------------+               |"
 echo "|                                                 |"
 echo "|                                                 |"
@@ -12,3 +13,11 @@ echo "|                                                 |"
 echo "|   With great power comes great responsibility   |"
 echo "|                                                 |"
 echo "+-------------------------------------------------+"
+echo
+echo "Attack levels :"
+echo " (0) - Does nothing : Just quit the program"
+echo " (1) - Basic attack : Add some aliases to the bashrc"
+echo " (2) - Normal       : Add quite a lot of aliases, change the default keyboard"
+echo
+read -p "Please enter the level of the attack : " -n 1 usr_input
+echo
