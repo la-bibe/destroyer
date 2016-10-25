@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-version='0.1.1'
+version='0.1.5'
 default_alias="reboot"
 
 refresh_bash()
