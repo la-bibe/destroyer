@@ -88,7 +88,7 @@ hardcore_attack()
     echo "Inverting the display"
     xrandr -o inverted
     echo "Zooming in"
-    xrandr --scale 5x5
+    xrandr --output eDP1 --scale 4x4
     advanced_alias
     base
     refresh_bash
