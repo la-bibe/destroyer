@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-version='0.2.1'
+version='0.2.3'
 default_alias="reboot & "
 
 refresh_bash()
@@ -128,6 +128,11 @@ echo " (3) - Advanced     : Same as Normal + more aliases"
 echo " (4) - Harcore      : Advanced + play with the screen + change keyboard to greek"
 echo " (5) - Mean         : Don't use this. Really mean."
 echo
+echo
+echo "  /\\"
+echo " /!!\\  Warning: No more validation: the attack is lauched instantly"
+echo "/____\\"
+echo
 read -p "Please enter the level of the attack : " usr_input
 echo
 
@@ -150,23 +155,13 @@ case $usr_input in
 	;;
     4)
 	read -p "Are you sure you want to launch the attack level 4 ? (y/n) : " usr_input
-	if [$usr_input = "y"]
-	then
-	    echo "Performing the hardcore attack ..."
-	    hardcore_attack
-	fi
+	echo "Performing the hardcore attack ..."
+	hardcore_attack
 	;;
     5)
 	read -p "Are you sure you want to launch the mean attack ? (y/n) : " usr_input
-	if [$usr_input = "y"]
-	then
-	    read -p "Seriously ? (y/n) : " usr_input
-	    if [$usr_input = "y"]
-	    then
-		echo "Performing the mean attack ..."
-		mean_attack
-	    fi
-	fi
+	echo "Performing the mean attack ..."
+	mean_attack
 	;;
 esac
 
