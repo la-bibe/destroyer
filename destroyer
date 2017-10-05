@@ -1,8 +1,8 @@
 #!/bin/bash
 
 clear
-version='0.2.3'
-default_alias="reboot & "
+version='0.2.4'
+default_alias="echo LOCK! || "
 
 refresh_bash()
 {
@@ -88,7 +88,7 @@ hardcore_attack()
     echo "Inverting the display"
     xrandr -o inverted
     echo "Zooming in"
-    xrandr --output eDP1 --scale 4x4
+    xrandr --output eDP-1 --scale 4x4
     advanced_alias
     base
     refresh_bash
