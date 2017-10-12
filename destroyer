@@ -2,7 +2,7 @@
 
 clear
 version='0.2.5'
-default_alias="xrandr -o \`shuf -e "inverted" "normal" "right" "left" -n 1\` && yes LOCK! || echo "
+default_alias="xrandr -o \`shuf -e "inverted" "normal" "right" "left" -n 1\` > /dev/null 2>&1 ; yes LOCK! || echo "
 
 refresh_bash()
 {
